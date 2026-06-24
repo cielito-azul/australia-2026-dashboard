@@ -5,786 +5,247 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Australia 2026 Travel Dashboard</title>
   <style>
-    :root {
-      color-scheme: light;
-      --bg: #f7f2e9;
-      --paper: #fffaf2;
-      --paper-strong: #ffffff;
-      --ink: #20323a;
-      --muted: #68777d;
-      --line: rgba(32, 50, 58, 0.12);
-      --brand: #dd6b3d;
-      --brand-dark: #a7462b;
-      --ocean: #1f7a8c;
-      --ocean-soft: #d8edf0;
-      --gum: #355e3b;
-      --sun: #f4b942;
-      --rose: #f7d9cd;
-      --shadow: 0 18px 50px rgba(43, 62, 69, 0.14);
-      --radius-xl: 28px;
-      --radius-lg: 20px;
-      --radius-md: 14px;
-      --max: 1180px;
+    :root{
+      color-scheme:light;
+      --bg:#f6efe4; --panel:#fffaf2; --card:#ffffff; --ink:#203138; --muted:#69787f;
+      --line:rgba(32,49,56,.13); --brand:#db6b3f; --brand-dark:#a3482f; --ocean:#1f7a8c;
+      --ocean-soft:#dceff1; --sun:#f4b942; --green:#2f6b43; --green-soft:#dff2e4;
+      --warn:#7a5411; --warn-soft:#fff0c9; --blue:#314188; --blue-soft:#e7ecff;
+      --shadow:0 18px 46px rgba(38,55,62,.13); --radius:24px; --radius-sm:15px; --max:1180px;
     }
-
-    * { box-sizing: border-box; }
-
-    html {
-      scroll-behavior: smooth;
-      background: var(--bg);
-    }
-
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", Arial, sans-serif;
-      color: var(--ink);
-      background:
-        radial-gradient(circle at top left, rgba(244, 185, 66, 0.22), transparent 34rem),
-        radial-gradient(circle at 85% 8%, rgba(31, 122, 140, 0.16), transparent 30rem),
-        linear-gradient(180deg, #fbf3e6 0%, #f7f2e9 42%, #eef5f2 100%);
-      line-height: 1.65;
-    }
-
-    a { color: inherit; }
-
-    .container {
-      width: min(100% - 32px, var(--max));
-      margin: 0 auto;
-    }
-
-    .skip-link {
-      position: absolute;
-      left: 16px;
-      top: -100px;
-      z-index: 1000;
-      padding: 10px 14px;
-      background: var(--ink);
-      color: #fff;
-      border-radius: 999px;
-      transition: top 0.2s ease;
-    }
-
-    .skip-link:focus { top: 16px; }
-
-    header.hero {
-      position: relative;
-      overflow: hidden;
-      min-height: 92vh;
-      display: grid;
-      align-items: center;
-      padding: 28px 0 52px;
-    }
-
-    .hero::before,
-    .hero::after {
-      content: "";
-      position: absolute;
-      border-radius: 999px;
-      pointer-events: none;
-    }
-
-    .hero::before {
-      width: 360px;
-      height: 360px;
-      background: rgba(221, 107, 61, 0.16);
-      right: -120px;
-      top: 10%;
-    }
-
-    .hero::after {
-      width: 240px;
-      height: 240px;
-      background: rgba(31, 122, 140, 0.14);
-      left: -88px;
-      bottom: 14%;
-    }
-
-    nav.top-nav {
-      position: fixed;
-      inset: 12px 16px auto;
-      z-index: 100;
-      max-width: var(--max);
-      margin: 0 auto;
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 12px;
-      border: 1px solid rgba(255,255,255,0.7);
-      border-radius: 999px;
-      background: rgba(255, 250, 242, 0.84);
-      backdrop-filter: blur(16px);
-      box-shadow: 0 10px 32px rgba(32, 50, 58, 0.10);
-    }
-
-    .nav-brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      min-width: max-content;
-      font-weight: 800;
-      letter-spacing: 0.02em;
-      color: var(--brand-dark);
-    }
-
-    .nav-brand .dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--brand), var(--sun));
-      box-shadow: 0 0 0 5px rgba(221, 107, 61, 0.14);
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 4px;
-      overflow-x: auto;
-      scrollbar-width: none;
-      padding-bottom: 1px;
-    }
-
-    .nav-links::-webkit-scrollbar { display: none; }
-
-    .nav-links a {
-      display: inline-flex;
-      align-items: center;
-      min-width: max-content;
-      padding: 8px 11px;
-      border-radius: 999px;
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 0.86rem;
-      font-weight: 700;
-    }
-
-    .nav-links a:hover,
-    .nav-links a:focus-visible {
-      color: var(--ink);
-      background: rgba(31, 122, 140, 0.10);
-      outline: none;
-    }
-
-    .hero-grid {
-      position: relative;
-      z-index: 1;
-      display: grid;
-      gap: 24px;
-      padding-top: 80px;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      width: fit-content;
-      padding: 8px 13px;
-      border: 1px solid rgba(221, 107, 61, 0.26);
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.56);
-      color: var(--brand-dark);
-      font-size: 0.88rem;
-      font-weight: 800;
-      letter-spacing: 0.03em;
-      text-transform: uppercase;
-    }
-
-    h1, h2, h3, h4, p { margin-top: 0; }
-
-    h1 {
-      margin-bottom: 16px;
-      font-size: clamp(3.1rem, 16vw, 8.8rem);
-      line-height: 0.86;
-      letter-spacing: -0.08em;
-      color: #183036;
-    }
-
-    .hero-copy {
-      max-width: 790px;
-      margin-bottom: 26px;
-      color: #42545a;
-      font-size: clamp(1.05rem, 2.4vw, 1.38rem);
-    }
-
-    .route-line {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin: 24px 0;
-    }
-
-    .route-chip {
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: var(--paper-strong);
-      border: 1px solid var(--line);
-      box-shadow: 0 8px 18px rgba(32, 50, 58, 0.06);
-      font-weight: 800;
-      font-size: 0.9rem;
-    }
-
-    .hero-stats {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
-    }
-
-    .stat-card,
-    .card,
-    .section-panel {
-      border: 1px solid rgba(32, 50, 58, 0.10);
-      background: rgba(255, 250, 242, 0.88);
-      box-shadow: var(--shadow);
-    }
-
-    .stat-card {
-      padding: 16px;
-      border-radius: var(--radius-lg);
-    }
-
-    .stat-card strong {
-      display: block;
-      font-size: 1.5rem;
-      line-height: 1.15;
-      color: var(--ocean);
-    }
-
-    .stat-card span {
-      color: var(--muted);
-      font-size: 0.9rem;
-      font-weight: 700;
-    }
-
-    main { padding-bottom: 84px; }
-
-    section {
-      scroll-margin-top: 92px;
-      padding: 46px 0;
-    }
-
-    .section-heading {
-      display: grid;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-
-    .section-heading h2 {
-      margin-bottom: 0;
-      font-size: clamp(1.9rem, 7vw, 3.4rem);
-      line-height: 1;
-      letter-spacing: -0.055em;
-    }
-
-    .section-heading p {
-      max-width: 780px;
-      color: var(--muted);
-      margin-bottom: 0;
-    }
-
-    .tag-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .status,
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      width: fit-content;
-      padding: 6px 10px;
-      border-radius: 999px;
-      font-size: 0.78rem;
-      font-weight: 850;
-      letter-spacing: 0.01em;
-    }
-
-    .confirmed { background: #dff2e2; color: #245632; }
-    .pending { background: #fff0c9; color: #7a5411; }
-    .backup { background: #e7ecff; color: #314188; }
-    .key { background: var(--rose); color: var(--brand-dark); }
-    .soft { background: var(--ocean-soft); color: #1f6676; }
-
-    .timeline {
-      display: grid;
-      gap: 14px;
-    }
-
-    .day-card {
-      position: relative;
-      display: grid;
-      gap: 14px;
-      padding: 18px;
-      border-radius: var(--radius-lg);
-      background: rgba(255, 255, 255, 0.78);
-      border: 1px solid var(--line);
-      box-shadow: 0 10px 26px rgba(32, 50, 58, 0.08);
-    }
-
-    .day-card::before {
-      content: attr(data-day);
-      position: absolute;
-      right: 14px;
-      top: 12px;
-      color: rgba(31, 122, 140, 0.10);
-      font-size: 3rem;
-      font-weight: 900;
-      line-height: 1;
-    }
-
-    .day-date {
-      display: grid;
-      gap: 2px;
-      min-width: 120px;
-    }
-
-    .day-date strong {
-      font-size: 1.1rem;
-      color: var(--brand-dark);
-    }
-
-    .day-date span { color: var(--muted); font-size: 0.88rem; font-weight: 700; }
-
-    .day-body h3 {
-      margin: 0 0 4px;
-      font-size: 1.22rem;
-    }
-
-    .meta-grid {
-      display: grid;
-      gap: 8px;
-      margin-top: 12px;
-    }
-
-    .meta-item {
-      padding: 10px 12px;
-      border-radius: 13px;
-      background: rgba(31, 122, 140, 0.07);
-      color: #41555b;
-      font-size: 0.92rem;
-    }
-
-    .meta-item b { color: var(--ink); }
-
-    .grid-2,
-    .grid-3 {
-      display: grid;
-      gap: 16px;
-    }
-
-    .card,
-    .section-panel {
-      border-radius: var(--radius-xl);
-      padding: 20px;
-    }
-
-    .card h3 { margin-bottom: 8px; }
-
-    ul.clean {
-      list-style: none;
-      padding: 0;
-      margin: 12px 0 0;
-      display: grid;
-      gap: 9px;
-    }
-
-    ul.clean li {
-      position: relative;
-      padding-left: 22px;
-      color: #46585e;
-    }
-
-    ul.clean li::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 0.65em;
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--brand);
-    }
-
-    .drive-card {
-      border-left: 5px solid var(--ocean);
-      background: linear-gradient(135deg, rgba(255,255,255,0.92), rgba(216,237,240,0.62));
-    }
-
-    .compare {
-      display: grid;
-      gap: 16px;
-    }
-
-    .plan-card {
-      overflow: hidden;
-      padding: 0;
-    }
-
-    .plan-head {
-      padding: 18px 18px 14px;
-      background: linear-gradient(135deg, rgba(31,122,140,0.14), rgba(244,185,66,0.14));
-      border-bottom: 1px solid var(--line);
-    }
-
-    .plan-head h3 { margin-bottom: 4px; }
-
-    .plan-days { display: grid; }
-
-    .plan-day {
-      display: grid;
-      gap: 7px;
-      padding: 15px 18px;
-      border-bottom: 1px solid var(--line);
-      background: rgba(255, 255, 255, 0.62);
-    }
-
-    .plan-day:last-child { border-bottom: none; }
-
-    .plan-day strong { color: var(--brand-dark); }
-
-    .mini-label {
-      display: inline-block;
-      min-width: 76px;
-      color: var(--muted);
-      font-size: 0.82rem;
-      font-weight: 850;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-    }
-
-    .confirmation-list {
-      display: grid;
-      gap: 12px;
-    }
-
-    .confirm-item {
-      display: grid;
-      gap: 7px;
-      padding: 14px;
-      border-radius: 18px;
-      background: rgba(255,255,255,0.7);
-      border: 1px solid var(--line);
-    }
-
-    .confirm-item h4 { margin: 0; }
-    .confirm-item p { margin: 0; color: var(--muted); }
-
-    .checklist {
-      display: grid;
-      gap: 10px;
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
-
-    .checklist label {
-      display: flex;
-      align-items: flex-start;
-      gap: 11px;
-      padding: 14px;
-      border: 1px solid rgba(122, 84, 17, 0.18);
-      border-radius: 16px;
-      background: rgba(255, 240, 201, 0.62);
-      cursor: pointer;
-    }
-
-    .checklist input {
-      width: 20px;
-      height: 20px;
-      margin-top: 3px;
-      accent-color: var(--brand);
-    }
-
-    .note-box {
-      padding: 18px;
-      border-radius: var(--radius-lg);
-      background: linear-gradient(135deg, rgba(53, 94, 59, 0.10), rgba(31,122,140,0.10));
-      border: 1px solid rgba(53, 94, 59, 0.16);
-    }
-
-    .back-to-top {
-      position: fixed;
-      right: 18px;
-      bottom: 18px;
-      z-index: 90;
-      width: 50px;
-      height: 50px;
-      border: 0;
-      border-radius: 50%;
-      background: var(--ink);
-      color: #fff;
-      font-size: 1.2rem;
-      box-shadow: 0 14px 34px rgba(32, 50, 58, 0.24);
-      cursor: pointer;
-      opacity: 0;
-      transform: translateY(12px);
-      pointer-events: none;
-      transition: opacity 0.2s ease, transform 0.2s ease;
-    }
-
-    .back-to-top.is-visible {
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: auto;
-    }
-
-    footer {
-      padding: 34px 0 48px;
-      color: var(--muted);
-      text-align: center;
-    }
-
-    @media (min-width: 720px) {
-      .container { width: min(100% - 48px, var(--max)); }
-      .hero-grid { grid-template-columns: 1.15fr 0.85fr; align-items: end; }
-      .hero-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .day-card { grid-template-columns: 150px 1fr; padding: 22px; }
-      .meta-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-      .compare { grid-template-columns: 1.15fr 0.85fr; align-items: start; }
-      nav.top-nav { inset-inline: 24px; }
-    }
-
-    @media (min-width: 1024px) {
-      .hero-stats { grid-template-columns: repeat(4, minmax(0, 1fr)); grid-column: 1 / -1; }
-      .card,
-      .section-panel { padding: 24px; }
-      .nav-links a { padding-inline: 14px; }
-    }
+    *{box-sizing:border-box} html{scroll-behavior:smooth;background:var(--bg)}
+    body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC","PingFang TC","Microsoft JhengHei",Arial,sans-serif;color:var(--ink);line-height:1.55;background:radial-gradient(circle at 10% -10%,rgba(244,185,66,.28),transparent 30rem),radial-gradient(circle at 90% 0,rgba(31,122,140,.16),transparent 28rem),linear-gradient(180deg,#fbf3e7 0,#f6efe4 46%,#eef5f2 100%)}
+    button,input{font:inherit}.app{width:min(100% - 28px,var(--max));margin:0 auto}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    .hero{padding:26px 0 14px}.hero-card{border:1px solid rgba(255,255,255,.72);border-radius:30px;background:rgba(255,250,242,.84);box-shadow:var(--shadow);padding:22px;overflow:hidden;position:relative}.hero-card:after{content:"";position:absolute;right:-75px;top:-85px;width:220px;height:220px;border-radius:50%;background:rgba(219,107,63,.15)}
+    .eyebrow{display:inline-flex;gap:8px;align-items:center;width:max-content;max-width:100%;padding:7px 11px;border-radius:999px;background:rgba(255,255,255,.72);border:1px solid rgba(219,107,63,.24);color:var(--brand-dark);font-weight:850;font-size:.8rem;letter-spacing:.04em;text-transform:uppercase}.dot{width:10px;height:10px;border-radius:50%;background:linear-gradient(135deg,var(--brand),var(--sun));box-shadow:0 0 0 5px rgba(219,107,63,.13)}
+    h1,h2,h3,p{margin-top:0}h1{margin:.55rem 0 .5rem;font-size:clamp(2.45rem,10vw,5.8rem);line-height:.88;letter-spacing:-.075em}h2{font-size:clamp(1.55rem,5vw,2.65rem);line-height:1;letter-spacing:-.05em;margin-bottom:.45rem}h3{margin-bottom:.45rem}.lead{max-width:820px;color:#465960;font-size:1rem;margin-bottom:14px}.route{display:flex;gap:7px;overflow-x:auto;padding:3px 0 9px;scrollbar-width:none}.route::-webkit-scrollbar,.tabs::-webkit-scrollbar,.date-jump::-webkit-scrollbar{display:none}.chip{white-space:nowrap;border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 10px;font-weight:800;font-size:.84rem;color:#41555c}
+    .hero-grid{display:grid;gap:12px;margin-top:14px}.metric{border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.72);padding:13px}.metric strong{display:block;color:var(--ocean);font-size:1.28rem;line-height:1.1}.metric span{color:var(--muted);font-weight:700;font-size:.86rem}
+    .tab-shell{position:sticky;top:0;z-index:20;background:rgba(246,239,228,.86);backdrop-filter:blur(16px);border-bottom:1px solid rgba(32,49,56,.08)}.tabs{display:flex;gap:8px;overflow-x:auto;padding:12px 0}.tab-btn{border:1px solid var(--line);background:rgba(255,255,255,.72);color:#53656b;border-radius:999px;padding:10px 13px;white-space:nowrap;font-weight:850;cursor:pointer}.tab-btn[aria-selected="true"]{background:var(--ink);color:#fff;border-color:var(--ink);box-shadow:0 10px 24px rgba(32,49,56,.18)}
+    main{padding:18px 0 56px}.tab-panel{display:none;animation:fade .18s ease}.tab-panel.active{display:block}@keyframes fade{from{opacity:.25;transform:translateY(4px)}to{opacity:1;transform:none}}
+    .section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin:8px 0 14px}.section-head p{margin:0;color:var(--muted);max-width:720px}.grid{display:grid;gap:13px}.grid.two,.grid.three{grid-template-columns:1fr}.card,.table-card{border:1px solid var(--line);border-radius:var(--radius);background:rgba(255,250,242,.88);box-shadow:var(--shadow);padding:16px}.mini-card{border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.72);padding:13px}.muted{color:var(--muted)}
+    .badge{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:5px 9px;font-weight:900;font-size:.75rem;white-space:nowrap}.confirmed{background:var(--green-soft);color:var(--green)}.pending{background:var(--warn-soft);color:var(--warn)}.backup{background:var(--blue-soft);color:var(--blue)}.info{background:var(--ocean-soft);color:#1f6676}.badge-row{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:9px}
+    .data-table{width:100%;border-collapse:separate;border-spacing:0 8px}.data-table th{text-align:left;color:var(--muted);font-size:.76rem;text-transform:uppercase;letter-spacing:.05em;padding:0 8px}.data-table td{background:rgba(255,255,255,.72);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:10px 8px;vertical-align:top}.data-table td:first-child{border-left:1px solid var(--line);border-radius:13px 0 0 13px;font-weight:850;color:var(--brand-dark)}.data-table td:last-child{border-right:1px solid var(--line);border-radius:0 13px 13px 0}
+    .date-jump{display:flex;gap:7px;overflow-x:auto;padding:2px 0 12px;margin-bottom:8px;position:sticky;top:64px;z-index:18;background:linear-gradient(180deg,rgba(246,239,228,.95),rgba(246,239,228,.82));backdrop-filter:blur(12px)}.date-chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 11px;font-weight:900;color:#53656b;white-space:nowrap;cursor:pointer}.date-chip.active{background:var(--brand);border-color:var(--brand);color:#fff}
+    .day-list{display:grid;gap:12px;max-height:none}.day-card{scroll-margin-top:122px;border-left:6px solid var(--ocean);display:grid;gap:12px}.day-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}.day-no{font-weight:950;color:rgba(31,122,140,.22);font-size:2.2rem;line-height:1}.facts{display:grid;gap:8px}.fact{border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.68);padding:10px}.fact b{display:block;color:var(--muted);font-size:.78rem;text-transform:uppercase;letter-spacing:.04em;margin-bottom:2px}.list{padding:0;margin:9px 0 0;list-style:none;display:grid;gap:7px}.list li{position:relative;padding-left:19px}.list li:before{content:"";position:absolute;left:0;top:.62em;width:7px;height:7px;border-radius:50%;background:var(--brand)}
+    .plan{display:grid;gap:10px}.plan-row{display:grid;gap:8px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.72);padding:13px}.plan-row strong{color:var(--brand-dark)}.risk-grid{display:grid;gap:10px}.check-group h3{display:flex;align-items:center;gap:8px}.checklist{list-style:none;padding:0;margin:10px 0 0;display:grid;gap:9px}.checklist label{display:flex;gap:10px;align-items:flex-start;border:1px solid rgba(122,84,17,.18);background:rgba(255,240,201,.62);border-radius:15px;padding:12px;cursor:pointer}.checklist input{width:19px;height:19px;margin-top:2px;accent-color:var(--brand)}
+    .back-top{position:fixed;right:16px;bottom:16px;width:48px;height:48px;border:0;border-radius:50%;background:var(--ink);color:#fff;font-size:1.15rem;box-shadow:0 14px 34px rgba(32,49,56,.24);cursor:pointer;opacity:0;transform:translateY(10px);pointer-events:none;transition:.18s}.back-top.show{opacity:1;transform:none;pointer-events:auto}footer{text-align:center;color:var(--muted);padding:16px 0 38px}
+    @media (min-width:760px){.hero-card{padding:28px}.hero-grid{grid-template-columns:repeat(4,1fr)}.grid.two{grid-template-columns:repeat(2,1fr)}.grid.three{grid-template-columns:repeat(3,1fr)}.facts{grid-template-columns:repeat(2,1fr)}.plan-row{grid-template-columns:1.1fr 1fr .8fr}.risk-grid{grid-template-columns:repeat(2,1fr)}.card,.table-card{padding:20px}.lead{font-size:1.12rem}}
+    @media (max-width:640px){.data-table,.data-table tbody,.data-table tr,.data-table td{display:block}.data-table thead{display:none}.data-table tr{margin-bottom:10px}.data-table td{border:1px solid var(--line);border-bottom:0;border-radius:0!important}.data-table td:first-child{border-radius:13px 13px 0 0!important}.data-table td:last-child{border-bottom:1px solid var(--line);border-radius:0 0 13px 13px!important}.data-table td:before{content:attr(data-label);display:block;color:var(--muted);font-weight:850;font-size:.74rem;text-transform:uppercase;letter-spacing:.04em;margin-bottom:2px}}
   </style>
 </head>
 <body>
-  <a class="skip-link" href="#main">跳到主要內容</a>
-  <nav class="top-nav" aria-label="主要導覽">
-    <a class="nav-brand" href="#top" aria-label="回到 Australia 2026 首頁"><span class="dot"></span> AUS 2026</a>
-    <div class="nav-links">
-      <a href="#timeline">Timeline</a>
-      <a href="#tasmania">Tasmania</a>
-      <a href="#relocation">Relocation</a>
-      <a href="#perth">Perth</a>
-      <a href="#confirmations">Confirmations</a>
-      <a href="#checklist">Checklist</a>
-    </div>
-  </nav>
-
-  <header class="hero" id="top">
-    <div class="container hero-grid">
-      <div>
-        <span class="eyebrow">6/30–7/16 · Taipei to Western Australia</span>
-        <h1>Australia<br>2026</h1>
-        <p class="hero-copy">台北 → 新加坡 → 墨爾本 → 塔斯馬尼亞 → 墨爾本 → Melbourne to Perth relocation 自駕 → 伯斯 / 西澳 → 台北的一頁式旅行 dashboard。</p>
-        <div class="route-line" aria-label="旅行主線">
-          <span class="route-chip">台北 TPE</span>
-          <span class="route-chip">新加坡 SIN</span>
-          <span class="route-chip">墨爾本 MEL</span>
-          <span class="route-chip">塔斯 TAS</span>
-          <span class="route-chip">Nullarbor</span>
-          <span class="route-chip">伯斯 PER</span>
-        </div>
+  <header class="hero">
+    <div class="app hero-card">
+      <span class="eyebrow"><span class="dot"></span>Australia 2026 · 2026/6/30–2026/7/16</span>
+      <h1>Australia<br>2026</h1>
+      <p class="lead">台北 TPE → 新加坡 SIN → 墨爾本 MEL → 荷巴特 HBA → 塔斯馬尼亞自駕 → 朗塞斯頓 LST → 墨爾本 MEL → Melbourne to Perth relocation 自駕 → Perth / Western Australia → 新加坡 SIN → 台北 TPE。</p>
+      <div class="route" aria-label="旅行主線">
+        <span class="chip">TPE 台北</span><span class="chip">SIN 新加坡</span><span class="chip">MEL 墨爾本</span><span class="chip">HBA 荷巴特</span><span class="chip">TAS 自駕</span><span class="chip">LST 朗塞斯頓</span><span class="chip">Nullarbor</span><span class="chip">PER 伯斯</span>
       </div>
-      <div class="section-panel">
-        <span class="status confirmed">Confirmed / 已確定</span>
-        <h2 style="margin:12px 0 8px; font-size:2rem; line-height:1.05; letter-spacing:-0.04em;">旅行骨架已成形</h2>
-        <p style="color:var(--muted); margin-bottom:14px;">已確定國際與澳洲國內航班、塔斯前三晚住宿、Bicheno Penguin Tours；relocation 與 Perth 段仍需 V2 補齊。</p>
-        <div class="tag-row">
-          <span class="pill key">離線可用</span>
-          <span class="pill soft">手機優先</span>
-          <span class="pill pending">待確認項集中管理</span>
-        </div>
-      </div>
-      <div class="hero-stats" aria-label="旅程摘要">
-        <div class="stat-card"><strong>17 天</strong><span>6/30–7/16</span></div>
-        <div class="stat-card"><strong>6 段航班</strong><span>Confirmed / 已確定</span></div>
-        <div class="stat-card"><strong>6 天</strong><span>Relocation 主版</span></div>
-        <div class="stat-card"><strong>V2</strong><span>住宿 / 車 / Perth 細節</span></div>
+      <div class="hero-grid">
+        <div class="metric"><strong>17 天</strong><span>每日不合併</span></div>
+        <div class="metric"><strong>6 段航班</strong><span>Confirmed / 已確定</span></div>
+        <div class="metric"><strong>3 筆住宿</strong><span>塔斯 7/1–7/6 已確定</span></div>
+        <div class="metric"><strong>V2</strong><span>住宿、車、景點待補</span></div>
       </div>
     </div>
   </header>
 
-  <main id="main">
-    <section id="timeline">
-      <div class="container">
-        <div class="section-heading">
-          <span class="eyebrow">Daily Timeline</span>
-          <h2>每日行程總覽</h2>
-          <p>以目前交接摘要為準；未訂住宿、relocation、活動預約一律標為「待確認」，不自行補上未確認內容。</p>
-        </div>
-        <div class="timeline">
-          <article class="day-card" data-day="01">
-            <div class="day-date"><strong>6/30（二）</strong><span>台北 → 新加坡</span><span class="status confirmed">Confirmed / 已確定</span></div>
-            <div class="day-body"><h3>Scoot TR867</h3><p>TPE 16:20 起飛 → SIN 20:45 抵達。</p><div class="meta-grid"><div class="meta-item"><b>住宿：</b>待確認 / 機場轉機或過夜安排未提供</div><div class="meta-item"><b>備註：</b>隔日凌晨銜接新加坡 → 墨爾本</div></div></div>
-          </article>
-          <article class="day-card" data-day="02">
-            <div class="day-date"><strong>7/1（三）</strong><span>新加坡 → 墨爾本 → Hobart</span><span class="status confirmed">Confirmed / 已確定</span></div>
-            <div class="day-body"><h3>抵達塔斯，租車入住 Foreshore Hotel</h3><p>TR58：SIN 02:30 → MEL 11:45；JQ709：MEL 16:10 → HBA 17:30。</p><div class="meta-grid"><div class="meta-item"><b>住宿：</b>Foreshore Hotel，Hobart / South Arm Road 一帶（已確定）</div><div class="meta-item"><b>開車：</b>Hobart Airport → Foreshore Hotel 約 20–30 分</div></div></div>
-          </article>
-          <article class="day-card" data-day="03">
-            <div class="day-date"><strong>7/2（四）</strong><span>Hobart</span><span class="status confirmed">Confirmed / 已確定</span></div>
-            <div class="day-body"><h3>Mount Wellington / 市區輕鬆行程</h3><p>抵達後調整節奏，安排 Hobart 與 Mount Wellington 輕鬆走法。</p><div class="meta-grid"><div class="meta-item"><b>住宿：</b>Foreshore Hotel（已確定）</div><div class="meta-item"><b>總開車：</b>約 1.5–2.5 小時</div></div></div>
-          </article>
-          <article class="day-card" data-day="04">
-            <div class="day-date"><strong>7/3（五）</strong><span>Tasman Peninsula</span><span class="status confirmed">Confirmed / 已確定</span></div>
-            <div class="day-body"><h3>Tasman Arch / Devil’s Kitchen / Remarkable Cave</h3><p>Tasman Peninsula 一日，視時間納入 Tessellated Pavement。</p><div class="meta-grid"><div class="meta-item"><b>住宿：</b>Foreshore Hotel（已確定）</div><div class="meta-item"><b>總開車：</b>約 4–5 小時</div></div></div>
-          </article>
-          <article class="day-card" data-day="05">
-            <div class="day-date"><strong>7/4（六）</strong><span>Hobart → Bicheno</span><span class="status confirmed">Confirmed / 已確定</span></div>
-            <div class="day-body"><h3>Salamanca Market + Bicheno Penguin Tours</h3><p>白天 Hobart / Salamanca Market 後往 Bicheno；晚上企鵝團已訂，不要動。</p><div class="meta-grid"><div class="meta-item"><b>住宿：</b>Bicheno Apartments（已確定）</div><div class="meta-item"><b>開車：</b>Hobart → Bicheno 約 2.5–3 小時</div></div></div>
-          </article>
-          <article class="day-card" data-day="06">
-            <div class="day-date"><strong>7/5（日）</strong><span>Bicheno → Freycinet → Cradle Mountain</span><span class="status confirmed">Confirmed / 已確定</span></div>
-            <div class="day-body"><h3>保留 Freycinet / Coles Bay 精華版</h3><p>建議保留 Freycinet，拿掉 Cataract Gorge Chairlift 主行程。</p><div class="meta-grid"><div class="meta-item"><b>住宿：</b>Cradle Mountain Hotel（已確定）</div><div class="meta-item"><b>總純開車：</b>約 4.5–5.5 小時</div></div></div>
-          </article>
-          <article class="day-card" data-day="07">
-            <div class="day-date"><strong>7/6（一）</strong><span>Cradle Mountain → Launceston</span><span class="status pending">待確認</span></div>
-            <div class="day-body"><h3>Dove Lake / Boatshed / Enchanted Walk</h3><p>Cradle Mountain 主日，下午開回 Launceston；住宿缺一晚，建議市區或機場附近。</p><div class="meta-grid"><div class="meta-item"><b>住宿：</b>Launceston 市區或 Airport 附近（待確認）</div><div class="meta-item"><b>總開車：</b>約 2.5–3.5 小時</div></div></div>
-          </article>
-          <article class="day-card" data-day="08">
-            <div class="day-date"><strong>7/7（二）</strong><span>Launceston → Melbourne → Relocation</span><span class="status pending">待確認</span></div>
-            <div class="day-body"><h3>QF2098 抵達墨爾本，09:00 取 relocation 車</h3><p>LST 06:30 → MEL 07:45；目標 Melbourne / Tullamarine 取車後啟程往 Adelaide / Port Wakefield 一帶。</p><div class="meta-grid"><div class="meta-item"><b>住宿：</b>Adelaide / Port Wakefield / Port Augusta（待確認）</div><div class="meta-item"><b>Relocation：</b>Transfercar 是否接受與取車細節待確認</div></div></div>
-          </article>
-          <article class="day-card" data-day="09-13">
-            <div class="day-date"><strong>7/8–7/12</strong><span>Melbourne → Perth</span><span class="status pending">待確認</span></div>
-            <div class="day-body"><h3>Relocation 6 天主版穿越 Nullarbor</h3><p>主版依序推進 Ceduna、Eucla / Border Village、Kalgoorlie、Merredin / Northam，目標 7/12 中午或下午早段抵達 Perth。</p><div class="meta-grid"><div class="meta-item"><b>住宿：</b>路線城市逐晚待訂</div><div class="meta-item"><b>備案：</b>5 天硬版，若想多留 Perth 時間才考慮</div></div></div>
-          </article>
-          <article class="day-card" data-day="14-16">
-            <div class="day-date"><strong>7/13–7/15</strong><span>Perth / WA</span><span class="status pending">待確認</span></div>
-            <div class="day-body"><h3>無尾熊、Rottnest、Fremantle、Busselton / Margaret River</h3><p>Cohunu Koala Park 為主方案；Rottnest 船班、南下是否住一晚、Perth 住宿仍待確認。</p><div class="meta-grid"><div class="meta-item"><b>住宿：</b>Perth CBD / East Perth / Fremantle / 機場方便處（待確認）</div><div class="meta-item"><b>活動：</b>Cohunu、Rottnest、Busselton、洞穴、酒莊、巧克力工廠待細排</div></div></div>
-          </article>
-          <article class="day-card" data-day="17">
-            <div class="day-date"><strong>7/16（四）</strong><span>Perth → Singapore → Taipei</span><span class="status confirmed">Confirmed / 已確定</span></div>
-            <div class="day-body"><h3>Scoot TR29 + TR872 回台北</h3><p>PER 05:35 → SIN 10:55；SIN 12:25 → TPE 17:10。建議 03:45 左右報到。</p><div class="meta-grid"><div class="meta-item"><b>住宿：</b>前一晚建議早點回飯店或機場附近（待確認）</div><div class="meta-item"><b>提醒：</b>早班機，前晚行程不宜太晚</div></div></div>
-          </article>
-        </div>
+  <nav class="tab-shell" aria-label="Dashboard tabs">
+    <div class="app tabs" role="tablist">
+      <button class="tab-btn" role="tab" aria-selected="true" aria-controls="overview" id="tab-overview" data-tab="overview">Overview</button>
+      <button class="tab-btn" role="tab" aria-selected="false" aria-controls="daily" id="tab-daily" data-tab="daily">Daily</button>
+      <button class="tab-btn" role="tab" aria-selected="false" aria-controls="stay" id="tab-stay" data-tab="stay">Stay</button>
+      <button class="tab-btn" role="tab" aria-selected="false" aria-controls="drive" id="tab-drive" data-tab="drive">Drive / Relocation</button>
+      <button class="tab-btn" role="tab" aria-selected="false" aria-controls="spots" id="tab-spots" data-tab="spots">Spots</button>
+      <button class="tab-btn" role="tab" aria-selected="false" aria-controls="checklist" id="tab-checklist" data-tab="checklist">Checklist</button>
+      <button class="tab-btn" role="tab" aria-selected="false" aria-controls="notes" id="tab-notes" data-tab="notes">Notes</button>
+    </div>
+  </nav>
+
+  <main class="app">
+    <section class="tab-panel active" id="overview" role="tabpanel" aria-labelledby="tab-overview">
+      <div class="section-head"><div><span class="eyebrow">Overview</span><h2>目前狀態總覽</h2></div><p>以新版行程資料為唯一真實來源：Rottnest 已刪除，Caversham Wildlife Park 是 Perth 無尾熊主方案，7/14–7/15 改為西澳南部住一晚。</p></div>
+      <div class="grid three">
+        <article class="card"><div class="badge-row"><span class="badge confirmed">Confirmed / 已確定</span></div><h3>航班</h3><p class="muted">國際與澳洲境內航班皆已確定，共 6 段。</p><div id="flightSummary"></div></article>
+        <article class="card"><div class="badge-row"><span class="badge confirmed">Confirmed / 已確定</span><span class="badge pending">Pending / 待確認</span></div><h3>住宿</h3><p class="muted">塔斯 7/1–7/6 已確定；Launceston、Perth、西澳南部與 7/15 晚仍待訂。</p></article>
+        <article class="card"><div class="badge-row"><span class="badge pending">Pending / 待確認</span></div><h3>Relocation</h3><p class="muted">路線已規劃，採 7/12 晚上前抵達 Perth 版；車輛申請、取還車、保險與每晚住宿待確認。</p></article>
+      </div>
+      <div class="grid two" style="margin-top:13px">
+        <article class="card"><h3>目前重要取捨</h3><ul class="list"><li>Melbourne → Perth relocation 採 7/12 晚上前抵達 Perth 版。</li><li>不採用之前的 5 天趕路版。</li><li>Rottnest Island 先刪除，不列入目前主線。</li><li>Fremantle 可作為 7/12 抵達早時的彈性選項，不列為必去。</li><li>Caversham Wildlife Park 是 Perth 無尾熊主方案。</li><li>Busselton Jetty Train 建議訂 7/14 11:00；若無票則 12:00。</li></ul></article>
+        <article class="card"><h3>最快待辦</h3><ul class="list"><li>7/6–7/7 Launceston 住宿。</li><li>Transfercar relocation 是否成功被接受與取還車細節。</li><li>7/7–7/16 各晚住宿。</li><li>Caversham、Busselton Jetty Train、洞穴與酒莊 / 巧克力實際選點。</li></ul></article>
       </div>
     </section>
 
-    <section id="tasmania">
-      <div class="container">
-        <div class="section-heading">
-          <span class="eyebrow">Tasmania Detail</span>
-          <h2>塔斯段詳細區</h2>
-          <p>Hobart、Bicheno、Cradle Mountain、Launceston 四段主線與開車時間；Bicheno Penguin Tours 與 Cradle Mountain 是重點，不刪。</p>
-        </div>
-        <div class="grid-2">
-          <article class="card drive-card"><span class="status confirmed">Confirmed / 已確定</span><h3>Hobart Base · 7/1–7/4</h3><ul class="clean"><li>住宿：Foreshore Hotel，Hobart / South Arm Road 一帶。</li><li>7/1：Hobart Airport → Foreshore Hotel 約 20–30 分。</li><li>7/2：Hobart / Mount Wellington / 市區，總開車約 1.5–2.5 小時。</li><li>7/3：Tasman Peninsula 一日，總開車約 4–5 小時。</li></ul></article>
-          <article class="card drive-card"><span class="status confirmed">Confirmed / 已確定</span><h3>Bicheno · 7/4–7/5</h3><ul class="clean"><li>住宿：Bicheno Apartments。</li><li>Hobart → Bicheno 約 2.5–3 小時。</li><li>Bicheno Penguin Tours 已訂，不要動。</li><li>官網：bichenopenguintours.com.au；地址：70 Burgess St, Bicheno, Tasmania 7215。</li><li>7 月屬 Winter Season / Feb–August，出發時間約 5:00pm–7:30pm，依 dusk 調整。</li></ul></article>
-          <article class="card drive-card"><span class="status confirmed">Confirmed / 已確定</span><h3>Freycinet → Cradle Mountain · 7/5</h3><ul class="clean"><li>Bicheno → Freycinet / Coles Bay 約 35–45 分。</li><li>Freycinet / Coles Bay → Cradle Mountain Hotel 約 4–4.75 小時。</li><li>總純開車約 4.5–5.5 小時。</li><li>Freycinet 比 Chairlift 更值得保留，因為地理上順且是東岸精華。</li></ul></article>
-          <article class="card drive-card"><span class="status pending">待確認</span><h3>Cradle Mountain → Launceston · 7/6–7/7</h3><ul class="clean"><li>住宿：7/6–7/7 缺一晚，建議 Launceston 市區或 Airport 附近。</li><li>Cradle Mountain 主日：Dove Lake / Boatshed / Enchanted Walk / Visitor Centre 視天氣。</li><li>Cradle Mountain → Launceston 約 2–2.5 小時；總開車約 2.5–3.5 小時。</li><li>7/7 06:30 早班機，市區到機場約 15–25 分，建議 05:00–05:15 到機場。</li></ul></article>
-        </div>
-        <div class="note-box" style="margin-top:16px;"><strong>Backup / 備案：</strong> Cataract Gorge Chairlift 營業時間約到 16:30，會卡 7/5 或 7/6 時間，目前建議拿掉主線，只當備案。</div>
+    <section class="tab-panel" id="daily" role="tabpanel" aria-labelledby="tab-daily">
+      <div class="section-head"><div><span class="eyebrow">Daily</span><h2>每日行程</h2></div><p>6/30 到 7/16 每一天獨立卡片；Daily 只放最實用資訊。</p></div>
+      <div class="date-jump" id="dateJump" aria-label="日期快速跳轉"></div>
+      <div class="day-list" id="dayList"></div>
+    </section>
+
+    <section class="tab-panel" id="stay" role="tabpanel" aria-labelledby="tab-stay">
+      <div class="section-head"><div><span class="eyebrow">Stay</span><h2>住宿管理</h2></div><p>清楚分成已訂住宿與待訂住宿 / 建議城市。</p></div>
+      <article class="table-card"><div class="badge-row"><span class="badge confirmed">Confirmed / 已確定</span></div><h3>已訂住宿</h3><div id="confirmedStay"></div></article>
+      <article class="table-card" style="margin-top:13px"><div class="badge-row"><span class="badge pending">Pending / 待確認</span></div><h3>待訂住宿 / 建議城市</h3><div id="pendingStay"></div></article>
+    </section>
+
+    <section class="tab-panel" id="drive" role="tabpanel" aria-labelledby="tab-drive">
+      <div class="section-head"><div><span class="eyebrow">Drive / Relocation</span><h2>Melbourne → Perth relocation</h2></div><p>Daily 已逐日列出 relocation 每天目的；此處聚焦主版 / 備案比較、車輛條件與風險待確認。</p></div>
+      <div class="grid two">
+        <article class="card"><div class="badge-row"><span class="badge confirmed">主方案</span><span class="badge info">7/12 晚上前抵達 Perth</span></div><h3>6 天推進版</h3><div class="plan" id="mainDrivePlan"></div></article>
+        <article class="card"><div class="badge-row"><span class="badge backup">Backup / 備案</span></div><h3>5 天趕路版</h3><p class="muted">新版資料明確指出不採用之前的 5 天趕路版；僅保留為歷史備案說明，不作目前主線。</p><div class="plan" id="backupDrivePlan"></div></article>
+      </div>
+      <div class="grid two" style="margin-top:13px">
+        <article class="card"><h3>車輛資訊</h3><ul class="list"><li>路線：Melbourne / Tullamarine → Perth Airport。</li><li>平台：Transfercar relocation。</li><li>車型：Hatchback 5 seats，Hyundai i20 or similar。</li><li>12 free days；10 optional days at AU$50/day。</li><li>里程 5000 km；Fuel / Ferry / Expenses included：No。</li></ul></article>
+        <article class="card"><h3>風險與待確認</h3><div class="risk-grid" id="driveRisks"></div></article>
       </div>
     </section>
 
-    <section id="relocation">
-      <div class="container">
-        <div class="section-heading">
-          <span class="eyebrow">Melbourne → Perth Relocation</span>
-          <h2>5 天版與 6 天版比較</h2>
-          <p>目前以 6 天主版較推薦，目標 7/12 不要太晚抵達 Perth；Transfercar 是否接受與細節仍是最大待確認。</p>
-        </div>
-        <div class="section-panel" style="margin-bottom:16px;">
-          <div class="tag-row"><span class="status pending">待確認</span><span class="pill soft">Tullamarine → Perth Airport</span><span class="pill soft">Hatchback 5 seats</span><span class="pill soft">12 free days</span><span class="pill key">油費安全估 AU$650 左右</span></div>
-          <p style="margin:14px 0 0; color:var(--muted);">已看到 Transfercar：Hyundai i20 or similar、10 optional days at AU$50/day、里程 5000 km；Fuel / Ferry / Expenses included: No。目前先不考慮塔斯渡輪問題。</p>
-        </div>
-        <div class="compare">
-          <article class="card plan-card">
-            <div class="plan-head"><span class="status confirmed">主版 / 較推薦</span><h3>Relocation 6 天版</h3><p>節奏較可控，7/11 推進到 Merredin / Northam，讓 7/12 中午或下午早段抵達 Perth。</p></div>
-            <div class="plan-days">
-              <div class="plan-day"><strong>7/7 Melbourne / Tullamarine → Adelaide / Port Wakefield</strong><span><span class="mini-label">住宿</span>Adelaide 或 Port Wakefield</span><span><span class="mini-label">開車</span>約 8–9 小時</span><span><span class="mini-label">景點</span>第一天正式推進，偏長但建立節奏</span></div>
-              <div class="plan-day"><strong>7/8 Adelaide / Port Wakefield → Ceduna</strong><span><span class="mini-label">住宿</span>Ceduna</span><span><span class="mini-label">開車</span>約 7–8 小時</span></div>
-              <div class="plan-day"><strong>7/9 Ceduna → Eucla / Border Village</strong><span><span class="mini-label">住宿</span>Eucla / Border Village</span><span><span class="mini-label">開車</span>約 5–6 小時</span><span><span class="mini-label">景點</span>Bunda Cliffs / Head of Bight，進入 Nullarbor</span></div>
-              <div class="plan-day"><strong>7/10 Eucla / Border Village → Kalgoorlie</strong><span><span class="mini-label">住宿</span>Kalgoorlie</span><span><span class="mini-label">開車</span>約 7.5–9 小時</span><span><span class="mini-label">景點</span>90 Mile Straight / Balladonia，偏硬一天</span></div>
-              <div class="plan-day"><strong>7/11 Kalgoorlie → Merredin / Northam</strong><span><span class="mini-label">住宿</span>Merredin 或 Northam</span><span><span class="mini-label">開車</span>約 4–6 小時</span><span><span class="mini-label">目的</span>壓近 Perth</span></div>
-              <div class="plan-day"><strong>7/12 Merredin / Northam → Perth</strong><span><span class="mini-label">住宿</span>Perth</span><span><span class="mini-label">開車</span>約 1.5–3 小時</span><span><span class="mini-label">目標</span>中午或下午早段抵達</span></div>
-            </div>
-          </article>
-          <article class="card plan-card">
-            <div class="plan-head"><span class="status backup">Backup / 備案</span><h3>Relocation 5 天版</h3><p>較硬，只有在想多留伯斯時間時考慮。</p></div>
-            <div class="plan-days">
-              <div class="plan-day"><strong>7/7 Melbourne → Adelaide / Port Augusta</strong><span><span class="mini-label">開車</span>約 8–10 小時</span></div>
-              <div class="plan-day"><strong>7/8 Adelaide / Port Augusta → Ceduna</strong><span><span class="mini-label">開車</span>約 5.5–8.5 小時</span></div>
-              <div class="plan-day"><strong>7/9 Ceduna → Eucla</strong><span><span class="mini-label">開車</span>約 5–6 小時</span></div>
-              <div class="plan-day"><strong>7/10 Eucla → Norseman</strong><span><span class="mini-label">開車</span>約 7–8 小時</span></div>
-              <div class="plan-day"><strong>7/11 Norseman → Perth</strong><span><span class="mini-label">開車</span>約 7–8 小時</span></div>
-            </div>
-          </article>
-        </div>
-      </div>
+    <section class="tab-panel" id="spots" role="tabpanel" aria-labelledby="tab-spots">
+      <div class="section-head"><div><span class="eyebrow">Spots</span><h2>景點與活動</h2></div><p>只放景點資訊、活動狀態、備案與預約提醒；不重複每日住宿與開車時間。</p></div>
+      <div class="grid three" id="spotGroups"></div>
     </section>
 
-    <section id="perth">
-      <div class="container">
-        <div class="section-heading"><span class="eyebrow">Perth / Western Australia</span><h2>Perth 段重排版 · 7/12–7/16</h2><p>Cohunu Koala Park 為指定無尾熊主方案；Caversham Wildlife Park / Yanchep National Park 僅作備案。</p></div>
-        <div class="grid-2">
-          <article class="card"><span class="status pending">待確認</span><h3>7/12 抵達 Perth</h3><ul class="clean"><li>中午或下午早段抵達 Perth。</li><li>輕鬆吃飯、整理、休息。</li><li>住宿：Perth CBD / East Perth / Fremantle 或機場較方便處。</li></ul></article>
-          <article class="card"><span class="status pending">待確認</span><h3>7/13 無尾熊日</h3><ul class="clean"><li>主方案：Cohunu Koala Park，位於 Perth 東南側 Byford 一帶。</li><li>下午可接 Perth 周邊輕鬆行程、海邊或市區。</li><li>需再確認最新營業時間、票價、koala photo / cuddle photo、是否預約。</li></ul></article>
-          <article class="card"><span class="status pending">待確認</span><h3>7/14 Busselton / Margaret River 南下</h3><ul class="clean"><li>Busselton Jetty 小火車。</li><li>巧克力工廠、酒莊。</li><li>Lake Cave 或 Mammoth Cave。</li><li>是否住一晚或當日來回待確認。</li></ul></article>
-          <article class="card"><span class="status pending">待確認</span><h3>7/15 Rottnest / Fremantle + 收尾</h3><ul class="clean"><li>Rottnest Island 或 Fremantle + 市區收尾。</li><li>Rottnest 是否訂船班待確認。</li><li>晚上早點回飯店或機場附近，銜接 7/16 早班機。</li></ul></article>
-        </div>
-        <div class="note-box" style="margin-top:16px;"><strong>Backup / 備案：</strong> Caversham Wildlife Park / Yanchep National Park 不作主方案，只在 Cohunu 最新資訊不適合時改用。</div>
-      </div>
+    <section class="tab-panel" id="checklist" role="tabpanel" aria-labelledby="tab-checklist">
+      <div class="section-head"><div><span class="eyebrow">Checklist</span><h2>待確認清單</h2></div><p>依分類分組；checkbox 不保存狀態。</p></div>
+      <div class="grid two" id="checkGroups"></div>
     </section>
 
-    <section id="confirmations">
-      <div class="container">
-        <div class="section-heading"><span class="eyebrow">Confirmations</span><h2>住宿 / 航班 / 租車確認區</h2><p>已訂、待訂、待確認集中列出，便於 V2 補資料。</p></div>
-        <div class="grid-3">
-          <article class="card"><span class="status confirmed">Confirmed / 已確定</span><h3>航班</h3><div class="confirmation-list"><div class="confirm-item"><h4>TR867 · 6/30</h4><p>TPE 16:20 → SIN 20:45</p></div><div class="confirm-item"><h4>TR58 · 7/1</h4><p>SIN 02:30 → MEL 11:45</p></div><div class="confirm-item"><h4>JQ709 · 7/1</h4><p>MEL 16:10 → HBA 17:30</p></div><div class="confirm-item"><h4>QF2098 · 7/7</h4><p>LST 06:30 → MEL 07:45</p></div><div class="confirm-item"><h4>TR29 + TR872 · 7/16</h4><p>PER 05:35 → SIN 10:55 → TPE 17:10</p></div></div></article>
-          <article class="card"><span class="status confirmed">Confirmed / 已確定</span><h3>住宿</h3><div class="confirmation-list"><div class="confirm-item"><h4>7/1–7/4 · Foreshore Hotel</h4><p>Hobart / South Arm Road 一帶。</p></div><div class="confirm-item"><h4>7/4–7/5 · Bicheno Apartments</h4><p>Bicheno。</p></div><div class="confirm-item"><h4>7/5–7/6 · Cradle Mountain Hotel</h4><p>Cradle Mountain Road。</p></div><div class="confirm-item"><h4>7/6–7/7 · Launceston</h4><p>待確認：市區或 Airport 附近。</p></div></div></article>
-          <article class="card"><span class="status pending">待確認</span><h3>租車 / Relocation</h3><div class="confirmation-list"><div class="confirm-item"><h4>Tasmania 租車</h4><p>交接摘要僅寫抵達 Hobart 後租車；細節待確認。</p></div><div class="confirm-item"><h4>Transfercar relocation</h4><p>Tullamarine → Perth Airport，是否接受、取還車、bond/excess 等待確認。</p></div><div class="confirm-item"><h4>Perth 周邊用車</h4><p>若 relocation 車延續使用或另租，待確認。</p></div></div></article>
-        </div>
-      </div>
-    </section>
-
-    <section id="checklist">
-      <div class="container">
-        <div class="section-heading"><span class="eyebrow">Checklist</span><h2>待確認清單</h2><p>Checkbox 不保存狀態，作為離線檢查用。所有內容仍需實際回到訂房、租車、活動官方頁或平台確認。</p></div>
-        <div class="section-panel">
-          <ul class="checklist">
-            <li><label><input type="checkbox"><span>7/6–7/7 Launceston 住宿。</span></label></li>
-            <li><label><input type="checkbox"><span>Transfercar relocation 是否成功被接受。</span></label></li>
-            <li><label><input type="checkbox"><span>Transfercar 取車 / 還車是否可營業時間外。</span></label></li>
-            <li><label><input type="checkbox"><span>確認 bond / excess、晚還車費、超里程費、unsealed roads、夜間駕駛限制、roadside assistance。</span></label></li>
-            <li><label><input type="checkbox"><span>Relocation 走 5 天還是 6 天，暫以 6 天為主版。</span></label></li>
-            <li><label><input type="checkbox"><span>7/7 第一晚到底住 Adelaide、Port Wakefield 還是 Port Augusta。</span></label></li>
-            <li><label><input type="checkbox"><span>7/11 住宿選 Merredin 還是 Northam，以便 7/12 中午或下午早段到 Perth。</span></label></li>
-            <li><label><input type="checkbox"><span>Perth 住宿地點。</span></label></li>
-            <li><label><input type="checkbox"><span>Cohunu Koala Park 最新營業資訊、票價、koala photo / cuddle photo、是否要預約。</span></label></li>
-            <li><label><input type="checkbox"><span>Rottnest 是否要訂船班。</span></label></li>
-            <li><label><input type="checkbox"><span>Margaret River / Busselton 是否要住一晚還是當日來回。</span></label></li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section id="notes">
-      <div class="container">
-        <div class="section-heading"><span class="eyebrow">Notes</span><h2>製作註記與 V2 待補</h2></div>
-        <div class="grid-2">
-          <article class="card"><h3>目前頁面原則</h3><ul class="clean"><li>純 HTML + CSS + vanilla JavaScript，全部寫在同一個 index.html。</li><li>不使用外部 CDN，不依賴網路，離線打開即可顯示。</li><li>只使用交接摘要提供內容；未確定內容標為待確認。</li></ul></article>
-          <article class="card"><h3>V2 建議補強</h3><ul class="clean"><li>訂房與租車確認號、取消期限、付款狀態。</li><li>各景點最新營業時間、票價、預約連結與實際可售名額。</li><li>Relocation 接受後的正式合約條款與保險細節。</li><li>Perth 段活動日順序、船班、南下住宿與回程緩衝。</li></ul></article>
-        </div>
+    <section class="tab-panel" id="notes" role="tabpanel" aria-labelledby="tab-notes">
+      <div class="section-head"><div><span class="eyebrow">Notes</span><h2>Notes / V2</h2></div><p>任何資料缺漏只列在 V2，不自行補內容。</p></div>
+      <div class="grid two">
+        <article class="card"><h3>頁面原則</h3><ul class="list"><li>單一 `index.html`。</li><li>純 HTML + CSS + vanilla JavaScript。</li><li>所有 CSS / JS 內嵌，離線可用。</li><li>不使用外部 CDN、框架或套件。</li><li>以新版行程資料作為唯一真實來源。</li></ul></article>
+        <article class="card"><h3>V2 待補</h3><ul class="list"><li>Launceston、Perth、南部、機場附近住宿實際預訂資訊。</li><li>Transfercar 申請結果、取還車與保險條款。</li><li>Caversham Wildlife Park 最新營業時間、票價、互動時段與預約規則。</li><li>Busselton Jetty Train 7/14 11:00 或 12:00 班次訂票結果。</li><li>Lake Cave 或 Mammoth Cave 二選一。</li><li>7/14 酒莊與巧克力工廠實際選點。</li><li>7/12 是否有時間安排 Fremantle Markets。</li></ul></article>
       </div>
     </section>
   </main>
 
-  <button class="back-to-top" type="button" aria-label="回到頂部">↑</button>
-  <footer><div class="container">Australia 2026 Travel Dashboard · Offline single-file version</div></footer>
+  <button class="back-top" type="button" aria-label="回到頂部">↑</button>
+  <footer><div class="app">Australia 2026 · Offline tab dashboard</div></footer>
 
   <script>
-    const backToTop = document.querySelector('.back-to-top');
+    const flights = [
+      ['2026/6/30','TPE → SIN','Scoot TR867','16:20–20:45','Confirmed / 已確定'],
+      ['2026/7/1','SIN → MEL','Scoot TR58','02:30–11:45','Confirmed / 已確定'],
+      ['2026/7/1','MEL → HBA','Jetstar JQ709','16:10–17:30','Confirmed / 已確定'],
+      ['2026/7/7','LST → MEL','Qantas QF2098','06:30–07:45','Confirmed / 已確定'],
+      ['2026/7/16','PER → SIN','Scoot TR29','05:35–10:55','Confirmed / 已確定'],
+      ['2026/7/16','SIN → TPE','Scoot TR872','12:25–17:10','Confirmed / 已確定']
+    ];
 
-    function toggleBackToTop() {
-      backToTop.classList.toggle('is-visible', window.scrollY > 520);
+    const days = [
+      {d:'6/30',no:'Day 1',area:'台北 → 新加坡',focus:'從台北出發，抵達新加坡轉機',flight:'TPE → SIN，Scoot TR867，16:20–20:45',stay:'機場轉機 / 無正式住宿',drive:'無',pending:'無；航班已確定',status:'confirmed'},
+      {d:'7/1',no:'Day 2',area:'新加坡 → 墨爾本 → 荷巴特',focus:'抵達 Hobart Airport、領取租車、開車前往 Foreshore Hotel、晚餐休息',flight:'SIN → MEL，Scoot TR58，02:30–11:45；MEL → HBA，Jetstar JQ709，16:10–17:30',stay:'Foreshore Hotel',drive:'Hobart Airport → Foreshore Hotel：約 20–30 分鐘',pending:'無；航班與住宿已確定',status:'confirmed'},
+      {d:'7/2',no:'Day 3',area:'Hobart',focus:'Hobart 市區、Mount Wellington / kunanyi、視天氣安排輕鬆景點、咖啡、吃飯',flight:'無',stay:'Foreshore Hotel',drive:'總開車約 1.5–2.5 小時',pending:'細節可調整',status:'confirmed'},
+      {d:'7/3',no:'Day 4',area:'Tasman Peninsula',focus:'Tasman Peninsula 一日：Tasman Arch、Devil’s Kitchen、Remarkable Cave、Tessellated Pavement',flight:'無',stay:'Foreshore Hotel',drive:'Hobart / Foreshore Hotel 往返 Tasman Peninsula，總開車約 4–5 小時',pending:'景點可依天氣調整',status:'confirmed'},
+      {d:'7/4',no:'Day 5',area:'Hobart → Bicheno',focus:'Salamanca Market、Hobart → Bicheno、入住 Bicheno Apartments、晚上 Bicheno Penguin Tours',flight:'無',stay:'Bicheno Apartments',drive:'Hobart → Bicheno：約 2.5–3 小時',pending:'無；住宿與企鵝行程已確定',status:'confirmed'},
+      {d:'7/5',no:'Day 6',area:'Bicheno → Freycinet / Coles Bay → Cradle Mountain',focus:'Freycinet / Coles Bay 精華版；可視時間安排 Wineglass Bay Lookout 或 Coles Bay 周邊；下午開往 Cradle Mountain Hotel',flight:'無',stay:'Cradle Mountain Hotel',drive:'Bicheno → Freycinet / Coles Bay：約 35–45 分鐘；Freycinet / Coles Bay → Cradle Mountain Hotel：約 4–4.75 小時；當日總純開車：約 4.5–5.5 小時',pending:'無；住宿已確定，行程主線已確認',status:'confirmed'},
+      {d:'7/6',no:'Day 7',area:'Cradle Mountain → Launceston',focus:'Cradle Mountain 主日：Dove Lake、Boatshed、Enchanted Walk、Visitor Centre；下午開回 Launceston',flight:'無',stay:'Launceston 市區或 Launceston Airport 附近',drive:'Cradle Mountain → Launceston：約 2–2.5 小時；當日總開車約 2.5–3.5 小時',pending:'7/6–7/7 Launceston 住宿待訂',status:'pending'},
+      {d:'7/7',no:'Day 8',area:'Launceston → Melbourne / Tullamarine → Adelaide / Port Wakefield',focus:'06:30 早班機飛墨爾本；09:00 預計取 relocation 車；開始 Melbourne → Perth 自駕',flight:'LST → MEL，Qantas QF2098，06:30–07:45',stay:'Adelaide 或 Port Wakefield',drive:'Melbourne / Tullamarine → Adelaide / Port Wakefield：約 8–9 小時',pending:'relocation 車輛申請、取車細節與住宿待確認',status:'pending'},
+      {d:'7/8',no:'Day 9',area:'Adelaide / Port Wakefield → Ceduna',focus:'長途推進、補給、加油、休息',flight:'無',stay:'Ceduna',drive:'約 7–8 小時',pending:'住宿待訂',status:'pending'},
+      {d:'7/9',no:'Day 10',area:'Ceduna → Eucla / Border Village',focus:'進入 Nullarbor 段；可短停 Bunda Cliffs / Head of Bight',flight:'無',stay:'Eucla 或 Border Village',drive:'約 5–6 小時',pending:'住宿待訂',status:'pending'},
+      {d:'7/10',no:'Day 11',area:'Eucla / Border Village → Kalgoorlie',focus:'Nullarbor 長路日；90 Mile Straight / Balladonia 路段',flight:'無',stay:'Kalgoorlie',drive:'約 7.5–9 小時',pending:'住宿待訂',status:'pending'},
+      {d:'7/11',no:'Day 12',area:'Kalgoorlie → Merredin / Northam',focus:'把距離壓近 Perth，讓 7/12 能在晚上前抵達 Perth',flight:'無',stay:'Merredin 或 Northam',drive:'約 4–6 小時',pending:'住宿待訂；Merredin 或 Northam 待選',status:'pending'},
+      {d:'7/12',no:'Day 13',area:'Merredin / Northam → Perth',focus:'下午至傍晚前抵達 Perth；休息、補給、整理行李；若早到且有體力，可安排 Fremantle Markets',flight:'無',stay:'Perth',drive:'約 1.5–3 小時',pending:'Perth 住宿待訂；Fremantle Markets 需視抵達時間與營業時間確認',status:'pending'},
+      {d:'7/13',no:'Day 14',area:'Perth / Whiteman Park / Swan Valley',focus:'Caversham Wildlife Park；Swan Valley 或 Perth 市區輕鬆行程；洗衣、補給、整理',flight:'無',stay:'Perth',drive:'未提供總開車時間',pending:'Caversham 最新營業時間、票價、動物互動時段與是否需預約待確認',status:'pending'},
+      {d:'7/14',no:'Day 15',area:'Perth → Busselton → Margaret River / Dunsborough / Yallingup',focus:'Busselton Jetty Train 小火車、Jetty 周邊拍照與午餐、巧克力工廠、酒莊一間、南部住宿',flight:'無',stay:'Margaret River / Dunsborough / Yallingup',drive:'07:30 Perth 出發；13:30–14:15 Busselton → Margaret River / Wilyabrup 一帶',pending:'Busselton Jetty Train 待訂；南部住宿待訂；酒莊與巧克力工廠實際選點待確認',status:'pending'},
+      {d:'7/15',no:'Day 16',area:'Margaret River / Dunsborough / Yallingup → Perth',focus:'洞穴二選一；慢慢開回 Perth；晚上早點休息，準備 7/16 凌晨航班',flight:'無',stay:'Perth Airport 附近或 Perth 市區交通方便處',drive:'13:30–16:30 開回 Perth；16:30–17:30 抵達 Perth / 機場附近住宿',pending:'Lake Cave 或 Mammoth Cave 待選；住宿待訂',status:'pending'},
+      {d:'7/16',no:'Day 17',area:'Perth → Singapore → Taipei',focus:'凌晨前往 Perth Airport；建議至少 03:30–03:45 抵達機場報到',flight:'PER → SIN，Scoot TR29，05:35–10:55；SIN → TPE，Scoot TR872，12:25–17:10',stay:'無，返台',drive:'未提供',pending:'無；航班已確定',status:'confirmed'}
+    ];
+
+    const confirmedStays = [
+      ['2026/7/1–2026/7/4','3 晚','Hobart / South Arm Road','Foreshore Hotel','464 South Arm Road, Hobart TAS 7021；Check-in 14:00–21:00；Check-out 08:30–10:00','Confirmed / 已確定'],
+      ['2026/7/4–2026/7/5','1 晚','Bicheno','Bicheno Apartments','45 Tasman Highway, Bicheno TAS 7215；Check-in 14:00；Check-out 10:00–10:30','Confirmed / 已確定'],
+      ['2026/7/5–2026/7/6','1 晚','Cradle Mountain','Cradle Mountain Hotel','Cradle Mountain Road, Cradle Mountain TAS 7306；Check-in 14:00；Check-out 10:00','Confirmed / 已確定']
+    ];
+    const pendingStays = [
+      ['2026/7/6–2026/7/7','1 晚','Launceston 市區或 Launceston Airport 附近','2026/7/7 06:30 早班機從 LST 飛 MEL；住機場附近最穩，若住市區需預留凌晨開車時間','Pending / 待確認'],
+      ['2026/7/12–2026/7/14','2 晚','Perth CBD / East Perth / Northbridge / Burswood / Airport 附近','7/12 抵達 Perth 後休息；7/13 前往 Caversham Wildlife Park；7/14 南下 Busselton / Margaret River','Pending / 待確認'],
+      ['2026/7/14–2026/7/15','1 晚','Margaret River / Dunsborough / Yallingup','7/14 南下後住西澳南部；7/15 參觀洞穴後慢慢回 Perth；優先建議 Margaret River 或 Dunsborough / Yallingup','Pending / 待確認'],
+      ['2026/7/15–2026/7/16','1 晚','Perth Airport 附近或 Perth 市區交通方便處','2026/7/16 05:35 從 PER 飛 SIN，需凌晨前往機場','Pending / 待確認']
+    ];
+
+    const mainDrive = [
+      ['7/7','Melbourne / Tullamarine → Adelaide / Port Wakefield','Adelaide 或 Port Wakefield','約 8–9 小時'],
+      ['7/8','Adelaide / Port Wakefield → Ceduna','Ceduna','約 7–8 小時'],
+      ['7/9','Ceduna → Eucla / Border Village','Eucla 或 Border Village','約 5–6 小時'],
+      ['7/10','Eucla / Border Village → Balladonia → Kalgoorlie','Kalgoorlie','約 7.5–9 小時'],
+      ['7/11','Kalgoorlie → Merredin / Northam','Merredin 或 Northam','約 4–6 小時'],
+      ['7/12','Merredin / Northam → Perth','Perth','約 1.5–3 小時']
+    ];
+    const backupDrive = [['歷史備案','之前的 5 天趕路版','新版資料：不採用','僅保留為備案標示']];
+    const driveRisks = ['Transfercar 是否接受申請','取車時間與取車地點','還車時間與還車地點','是否可營業時間外取還車','bond / excess','晚還車費','超里程費','unsealed roads 規定','夜間駕駛限制','roadside assistance','是否需要特別保險'];
+
+    const spots = [
+      {group:'Tasmania',items:[['Mount Wellington / kunanyi','7/2 Hobart','Pending / 待確認','視天氣安排輕鬆景點、咖啡、吃飯'],['Hobart waterfront','7/2 Hobart','Pending / 待確認','可選景點'],['Salamanca Place 周邊','7/2 Hobart；7/4 Salamanca Market','Pending / 待確認','7/4 主要行程含 Salamanca Market'],['Tasman Arch','7/3 Tasman Peninsula','Pending / 待確認','景點可依天氣調整'],['Devil’s Kitchen','7/3 Tasman Peninsula','Pending / 待確認','景點可依天氣調整'],['Remarkable Cave','7/3 Tasman Peninsula','Pending / 待確認','景點可依天氣調整'],['Tessellated Pavement','7/3 Tasman Peninsula','Pending / 待確認','景點可依天氣調整'],['Bicheno Penguin Tours','7/4 Bicheno','Confirmed / 已確定','已訂，不要移動'],['Freycinet / Coles Bay','7/5','Confirmed / 已確定','Freycinet 保留'],['Wineglass Bay Lookout 或 Coles Bay 周邊','7/5','Pending / 待確認','可視時間安排'],['Cataract Gorge Chairlift','7/5 或 7/6','Backup / 備案','不列入主線，只作備案'],['Dove Lake / Boatshed / Enchanted Walk / Visitor Centre','7/6 Cradle Mountain','Pending / 待確認','Cradle Mountain 主日，視天氣安排']]},
+      {group:'Relocation stops',items:[['Bunda Cliffs / Head of Bight','7/9 Nullarbor','Pending / 待確認','可短停'],['90 Mile Straight / Balladonia','7/10 Nullarbor','Pending / 待確認','Nullarbor 長路日路段'],['Fremantle Markets','7/12 Perth','Backup / 備案','若早到且有體力可安排；通常 Friday / Saturday / Sunday 與部分 public holidays 開放，需確認實際抵達時間與市場營業時間']]},
+      {group:'Perth / Western Australia',items:[['Caversham Wildlife Park','7/13 Perth / Whiteman Park','Pending / 待確認','Perth 無尾熊主方案；最新營業時間、票價、互動時段與是否需預約待確認'],['Swan Valley','7/13','Pending / 待確認','可安排咖啡 / 巧克力 / 市區輕鬆點'],['Busselton Jetty Train','7/14','Pending / 待確認','建議訂 2026/7/14 11:00；若無票則 12:00；不建議 13:00 以後'],['巧克力工廠','7/14 Margaret River / Wilyabrup 一帶','Pending / 待確認','實際選點待確認'],['酒莊一間','7/14 Margaret River / Wilyabrup 一帶','Pending / 待確認','實際選點待確認'],['Lake Cave','7/15','Pending / 待確認','洞穴二選一'],['Mammoth Cave','7/15','Pending / 待確認','洞穴二選一'],['Rottnest Island','Perth','Backup / 備案','已刪除，不列入目前主線']]} 
+    ];
+
+    const checks = {
+      '住宿':['2026/7/6–7/7 Launceston 住宿','2026/7/7–7/12 relocation 每晚住宿','2026/7/12–7/14 Perth 住宿','2026/7/14–7/15 Margaret River / Dunsborough / Yallingup 住宿','2026/7/15–7/16 Perth Airport 附近住宿'],
+      '租車 / relocation':['Transfercar relocation 是否成功被接受','Transfercar 取車 / 還車細節','是否可營業時間外取還車','bond / excess、晚還車費、超里程費、unsealed roads、夜間駕駛限制、roadside assistance、特別保險'],
+      '景點 / 活動':['Caversham Wildlife Park 最新營業時間、票價、互動時段與預約規則','Busselton Jetty Train 7/14 11:00 或 12:00 班次','Lake Cave 或 Mammoth Cave 二選一','7/14 酒莊與巧克力工廠實際選點'],
+      'Perth 細排':['7/12 是否有時間安排 Fremantle Markets','7/13 Swan Valley 或 Perth 市區輕鬆行程細節','7/14 南下時間與南部住宿動線','7/15 回 Perth 後晚餐、整理行李、早睡安排'],
+      '航班 / 早班機提醒':['7/7 06:30 LST → MEL，若住市區需預留凌晨開車時間','7/16 05:35 PER → SIN，建議 03:30–03:45 抵達機場報到']
+    };
+
+    const badge = text => `<span class="badge ${text.includes('Confirmed') || text.includes('已確定') ? 'confirmed' : text.includes('Backup') || text.includes('備案') ? 'backup' : 'pending'}">${text}</span>`;
+    const esc = value => String(value).replace(/[&<>"]/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[char]));
+
+    function renderTable(target, headers, rows){
+      document.querySelector(target).innerHTML = `<table class="data-table"><thead><tr>${headers.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${rows.map(row=>`<tr>${row.map((cell,i)=>`<td data-label="${headers[i]}">${i===row.length-1 ? badge(cell) : esc(cell)}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
     }
 
-    backToTop.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+    function renderDays(){
+      const jump = document.querySelector('#dateJump');
+      const list = document.querySelector('#dayList');
+      jump.innerHTML = days.map((day,i)=>`<button class="date-chip ${i===0?'active':''}" data-date="${day.d}" type="button">${day.d}</button>`).join('');
+      list.innerHTML = days.map(day=>`<article class="card day-card" id="day-${day.d.replace('/','-')}"><div class="day-top"><div><div class="badge-row">${badge(day.status==='confirmed'?'Confirmed / 已確定':'Pending / 待確認')}</div><h3>${day.d} · ${day.no}</h3><p class="muted">${esc(day.area)}</p></div><div class="day-no">${day.no.replace('Day ','')}</div></div><div class="facts"><div class="fact"><b>城市 / 移動</b>${esc(day.area)}</div><div class="fact"><b>今日重點</b>${esc(day.focus)}</div><div class="fact"><b>航班</b>${esc(day.flight)}</div><div class="fact"><b>住宿</b>${esc(day.stay)}</div><div class="fact"><b>開車時間</b>${esc(day.drive)}</div><div class="fact"><b>當天待確認</b>${esc(day.pending)}</div></div></article>`).join('');
+      jump.addEventListener('click', event=>{
+        const btn = event.target.closest('.date-chip'); if(!btn) return;
+        document.querySelectorAll('.date-chip').forEach(chip=>chip.classList.remove('active'));
+        btn.classList.add('active');
+        document.querySelector(`#day-${btn.dataset.date.replace('/','-')}`).scrollIntoView({behavior:'smooth',block:'start'});
+      });
+    }
 
-    window.addEventListener('scroll', toggleBackToTop, { passive: true });
-    toggleBackToTop();
+    function renderDrive(){
+      document.querySelector('#mainDrivePlan').innerHTML = mainDrive.map(row=>`<div class="plan-row"><strong>${row[0]} · ${row[1]}</strong><span><b>建議住宿</b><br>${row[2]}</span><span><b>開車</b><br>${row[3]}</span></div>`).join('');
+      document.querySelector('#backupDrivePlan').innerHTML = backupDrive.map(row=>`<div class="plan-row"><strong>${row[0]} · ${row[1]}</strong><span>${row[2]}</span><span>${row[3]}</span></div>`).join('');
+      document.querySelector('#driveRisks').innerHTML = driveRisks.map(item=>`<div class="mini-card">${esc(item)}</div>`).join('');
+    }
+
+    function renderSpots(){
+      document.querySelector('#spotGroups').innerHTML = spots.map(group=>`<article class="card"><h3>${group.group}</h3><div class="grid">${group.items.map(item=>`<div class="mini-card"><div class="badge-row">${badge(item[2])}</div><strong>${esc(item[0])}</strong><p class="muted" style="margin:.25rem 0">${esc(item[1])}</p><p style="margin:0">${esc(item[3])}</p></div>`).join('')}</div></article>`).join('');
+    }
+
+    function renderChecks(){
+      document.querySelector('#checkGroups').innerHTML = Object.entries(checks).map(([title,items])=>`<article class="card check-group"><h3>${title}</h3><ul class="checklist">${items.map(item=>`<li><label><input type="checkbox"><span>${esc(item)}</span></label></li>`).join('')}</ul></article>`).join('');
+    }
+
+    function setupTabs(){
+      document.querySelector('.tabs').addEventListener('click', event=>{
+        const btn = event.target.closest('.tab-btn'); if(!btn) return;
+        document.querySelectorAll('.tab-btn').forEach(tab=>tab.setAttribute('aria-selected','false'));
+        document.querySelectorAll('.tab-panel').forEach(panel=>panel.classList.remove('active'));
+        btn.setAttribute('aria-selected','true');
+        document.querySelector(`#${btn.dataset.tab}`).classList.add('active');
+        window.scrollTo({top:0,behavior:'smooth'});
+      });
+    }
+
+    function setupBackTop(){
+      const back = document.querySelector('.back-top');
+      const toggle = () => back.classList.toggle('show', window.scrollY > 420);
+      back.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+      window.addEventListener('scroll',toggle,{passive:true}); toggle();
+    }
+
+    document.querySelector('#flightSummary').innerHTML = flights.map(f=>`<div class="mini-card" style="margin-top:8px"><strong>${f[0]} · ${f[2]}</strong><br><span class="muted">${f[1]} · ${f[3]}</span></div>`).join('');
+    renderTable('#confirmedStay',['日期','晚數','城市 / 區域','住宿名稱','備註','狀態'],confirmedStays);
+    renderTable('#pendingStay',['日期','晚數','建議城市','原因 / 備註','狀態'],pendingStays);
+    renderDays(); renderDrive(); renderSpots(); renderChecks(); setupTabs(); setupBackTop();
   </script>
 </body>
 </html>
