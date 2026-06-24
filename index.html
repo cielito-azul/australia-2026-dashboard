@@ -16,11 +16,10 @@
     *{box-sizing:border-box} html{scroll-behavior:smooth;background:var(--bg)}
     body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC","PingFang TC","Microsoft JhengHei",Arial,sans-serif;color:var(--ink);line-height:1.55;background:radial-gradient(circle at 10% -10%,rgba(244,185,66,.28),transparent 30rem),radial-gradient(circle at 90% 0,rgba(31,122,140,.16),transparent 28rem),linear-gradient(180deg,#fbf3e7 0,#f6efe4 46%,#eef5f2 100%)}
     button,input{font:inherit}.app{width:min(100% - 28px,var(--max));margin:0 auto}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-    .hero{padding:26px 0 14px}.hero-card{border:1px solid rgba(255,255,255,.72);border-radius:30px;background:rgba(255,250,242,.84);box-shadow:var(--shadow);padding:22px;overflow:hidden;position:relative}.hero-card:after{content:"";position:absolute;right:-75px;top:-85px;width:220px;height:220px;border-radius:50%;background:rgba(219,107,63,.15)}
+    .hero{padding:70px 0 10px}.hero-card{border:1px solid rgba(255,255,255,.72);border-radius:22px;background:rgba(255,250,242,.84);box-shadow:var(--shadow);padding:16px;overflow:hidden;position:relative}.hero-card:after{content:"";position:absolute;right:-95px;top:-105px;width:190px;height:190px;border-radius:50%;background:rgba(219,107,63,.13)}
     .eyebrow{display:inline-flex;gap:8px;align-items:center;width:max-content;max-width:100%;padding:7px 11px;border-radius:999px;background:rgba(255,255,255,.72);border:1px solid rgba(219,107,63,.24);color:var(--brand-dark);font-weight:850;font-size:.8rem;letter-spacing:.04em;text-transform:uppercase}.dot{width:10px;height:10px;border-radius:50%;background:linear-gradient(135deg,var(--brand),var(--sun));box-shadow:0 0 0 5px rgba(219,107,63,.13)}
-    h1,h2,h3,p{margin-top:0}h1{margin:.55rem 0 .5rem;font-size:clamp(2.45rem,10vw,5.8rem);line-height:.88;letter-spacing:-.075em}h2{font-size:clamp(1.55rem,5vw,2.65rem);line-height:1;letter-spacing:-.05em;margin-bottom:.45rem}h3{margin-bottom:.45rem}.lead{max-width:820px;color:#465960;font-size:1rem;margin-bottom:14px}.route{display:flex;gap:7px;overflow-x:auto;padding:3px 0 9px;scrollbar-width:none}.route::-webkit-scrollbar,.tabs::-webkit-scrollbar,.date-jump::-webkit-scrollbar{display:none}.chip{white-space:nowrap;border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 10px;font-weight:800;font-size:.84rem;color:#41555c}
-    .hero-grid{display:grid;gap:12px;margin-top:14px}.metric{border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.72);padding:13px}.metric strong{display:block;color:var(--ocean);font-size:1.28rem;line-height:1.1}.metric span{color:var(--muted);font-weight:700;font-size:.86rem}
-    .tab-shell{position:sticky;top:0;z-index:20;background:rgba(246,239,228,.86);backdrop-filter:blur(16px);border-bottom:1px solid rgba(32,49,56,.08)}.tabs{display:flex;gap:8px;overflow-x:auto;padding:12px 0}.tab-btn{border:1px solid var(--line);background:rgba(255,255,255,.72);color:#53656b;border-radius:999px;padding:10px 13px;white-space:nowrap;font-weight:850;cursor:pointer}.tab-btn[aria-selected="true"]{background:var(--ink);color:#fff;border-color:var(--ink);box-shadow:0 10px 24px rgba(32,49,56,.18)}
+    h1,h2,h3,p{margin-top:0}h1{margin:.45rem 0 .15rem;font-size:clamp(2rem,7vw,4.2rem);line-height:.9;letter-spacing:-.07em}h2{font-size:clamp(1.45rem,4.4vw,2.35rem);line-height:1;letter-spacing:-.05em;margin-bottom:.4rem}h3{margin-bottom:.4rem}.trip-date{font-weight:900;color:var(--brand-dark);margin-bottom:10px}.route{display:flex;gap:7px;overflow-x:auto;padding:2px 0 0;scrollbar-width:none}.route::-webkit-scrollbar,.tabs::-webkit-scrollbar,.date-jump::-webkit-scrollbar{display:none}.chip{white-space:nowrap;border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 10px;font-weight:800;font-size:.84rem;color:#41555c}
+    .tab-shell{position:fixed;top:10px;left:0;right:0;z-index:30;background:transparent}.tabs{display:flex;justify-content:space-between;gap:6px;overflow-x:auto;padding:7px 9px;border:1px solid rgba(255,255,255,.72);border-radius:999px;background:rgba(255,250,242,.88);backdrop-filter:blur(16px);box-shadow:0 10px 28px rgba(32,49,56,.12)}.tab-btn{border:1px solid transparent;background:transparent;color:#53656b;border-radius:999px;padding:7px 10px;white-space:nowrap;font-size:.88rem;font-weight:850;cursor:pointer}.tab-btn[aria-selected="true"]{background:var(--ink);color:#fff;border-color:var(--ink);box-shadow:0 8px 18px rgba(32,49,56,.16)}
     main{padding:18px 0 56px}.tab-panel{display:none;animation:fade .18s ease}.tab-panel.active{display:block}@keyframes fade{from{opacity:.25;transform:translateY(4px)}to{opacity:1;transform:none}}
     .section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin:8px 0 14px}.section-head p{margin:0;color:var(--muted);max-width:720px}.grid{display:grid;gap:13px}.grid.two,.grid.three{grid-template-columns:1fr}.card,.table-card{border:1px solid var(--line);border-radius:var(--radius);background:rgba(255,250,242,.88);box-shadow:var(--shadow);padding:16px}.mini-card{border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.72);padding:13px}.muted{color:var(--muted)}
     .badge{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:5px 9px;font-weight:900;font-size:.75rem;white-space:nowrap}.confirmed{background:var(--green-soft);color:var(--green)}.pending{background:var(--warn-soft);color:var(--warn)}.backup{background:var(--blue-soft);color:var(--blue)}.info{background:var(--ocean-soft);color:#1f6676}.badge-row{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:9px}
@@ -29,24 +28,18 @@
     .day-list{display:grid;gap:12px;max-height:none}.day-card{scroll-margin-top:122px;border-left:6px solid var(--ocean);display:grid;gap:12px}.day-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}.day-no{font-weight:950;color:rgba(31,122,140,.22);font-size:2.2rem;line-height:1}.facts{display:grid;gap:8px}.fact{border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.68);padding:10px}.fact b{display:block;color:var(--muted);font-size:.78rem;text-transform:uppercase;letter-spacing:.04em;margin-bottom:2px}.list{padding:0;margin:9px 0 0;list-style:none;display:grid;gap:7px}.list li{position:relative;padding-left:19px}.list li:before{content:"";position:absolute;left:0;top:.62em;width:7px;height:7px;border-radius:50%;background:var(--brand)}
     .plan{display:grid;gap:10px}.plan-row{display:grid;gap:8px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.72);padding:13px}.plan-row strong{color:var(--brand-dark)}.risk-grid{display:grid;gap:10px}.check-group h3{display:flex;align-items:center;gap:8px}.checklist{list-style:none;padding:0;margin:10px 0 0;display:grid;gap:9px}.checklist label{display:flex;gap:10px;align-items:flex-start;border:1px solid rgba(122,84,17,.18);background:rgba(255,240,201,.62);border-radius:15px;padding:12px;cursor:pointer}.checklist input{width:19px;height:19px;margin-top:2px;accent-color:var(--brand)}
     .back-top{position:fixed;right:16px;bottom:16px;width:48px;height:48px;border:0;border-radius:50%;background:var(--ink);color:#fff;font-size:1.15rem;box-shadow:0 14px 34px rgba(32,49,56,.24);cursor:pointer;opacity:0;transform:translateY(10px);pointer-events:none;transition:.18s}.back-top.show{opacity:1;transform:none;pointer-events:auto}footer{text-align:center;color:var(--muted);padding:16px 0 38px}
-    @media (min-width:760px){.hero-card{padding:28px}.hero-grid{grid-template-columns:repeat(4,1fr)}.grid.two{grid-template-columns:repeat(2,1fr)}.grid.three{grid-template-columns:repeat(3,1fr)}.facts{grid-template-columns:repeat(2,1fr)}.plan-row{grid-template-columns:1.1fr 1fr .8fr}.risk-grid{grid-template-columns:repeat(2,1fr)}.card,.table-card{padding:20px}.lead{font-size:1.12rem}}
+    @media (min-width:760px){.hero-card{padding:18px 22px}.grid.two{grid-template-columns:repeat(2,1fr)}.grid.three{grid-template-columns:repeat(3,1fr)}.facts{grid-template-columns:repeat(2,1fr)}.plan-row{grid-template-columns:1.1fr 1fr .8fr}.risk-grid{grid-template-columns:repeat(2,1fr)}.card,.table-card{padding:20px}}
     @media (max-width:640px){.data-table,.data-table tbody,.data-table tr,.data-table td{display:block}.data-table thead{display:none}.data-table tr{margin-bottom:10px}.data-table td{border:1px solid var(--line);border-bottom:0;border-radius:0!important}.data-table td:first-child{border-radius:13px 13px 0 0!important}.data-table td:last-child{border-bottom:1px solid var(--line);border-radius:0 0 13px 13px!important}.data-table td:before{content:attr(data-label);display:block;color:var(--muted);font-weight:850;font-size:.74rem;text-transform:uppercase;letter-spacing:.04em;margin-bottom:2px}}
   </style>
 </head>
 <body>
   <header class="hero">
     <div class="app hero-card">
-      <span class="eyebrow"><span class="dot"></span>Australia 2026 · 2026/6/30–2026/7/16</span>
-      <h1>Australia<br>2026</h1>
-      <p class="lead">台北 TPE → 新加坡 SIN → 墨爾本 MEL → 荷巴特 HBA → 塔斯馬尼亞自駕 → 朗塞斯頓 LST → 墨爾本 MEL → Melbourne to Perth relocation 自駕 → Perth / Western Australia → 新加坡 SIN → 台北 TPE。</p>
+      <span class="eyebrow"><span class="dot"></span>Travel dashboard</span>
+      <h1>Australia 2026</h1>
+      <div class="trip-date">2026/6/30–2026/7/16</div>
       <div class="route" aria-label="旅行主線">
-        <span class="chip">TPE 台北</span><span class="chip">SIN 新加坡</span><span class="chip">MEL 墨爾本</span><span class="chip">HBA 荷巴特</span><span class="chip">TAS 自駕</span><span class="chip">LST 朗塞斯頓</span><span class="chip">Nullarbor</span><span class="chip">PER 伯斯</span>
-      </div>
-      <div class="hero-grid">
-        <div class="metric"><strong>17 天</strong><span>每日不合併</span></div>
-        <div class="metric"><strong>6 段航班</strong><span>Confirmed / 已確定</span></div>
-        <div class="metric"><strong>3 筆住宿</strong><span>塔斯 7/1–7/6 已確定</span></div>
-        <div class="metric"><strong>V2</strong><span>住宿、車、景點待補</span></div>
+        <span class="chip">TPE</span><span class="chip">SIN</span><span class="chip">MEL</span><span class="chip">HBA</span><span class="chip">Tasmania</span><span class="chip">LST</span><span class="chip">Nullarbor</span><span class="chip">Perth / WA</span>
       </div>
     </div>
   </header>
@@ -56,24 +49,19 @@
       <button class="tab-btn" role="tab" aria-selected="true" aria-controls="overview" id="tab-overview" data-tab="overview">Overview</button>
       <button class="tab-btn" role="tab" aria-selected="false" aria-controls="daily" id="tab-daily" data-tab="daily">Daily</button>
       <button class="tab-btn" role="tab" aria-selected="false" aria-controls="stay" id="tab-stay" data-tab="stay">Stay</button>
-      <button class="tab-btn" role="tab" aria-selected="false" aria-controls="drive" id="tab-drive" data-tab="drive">Drive / Relocation</button>
+      <button class="tab-btn" role="tab" aria-selected="false" aria-controls="drive" id="tab-drive" data-tab="drive">Drive</button>
       <button class="tab-btn" role="tab" aria-selected="false" aria-controls="spots" id="tab-spots" data-tab="spots">Spots</button>
       <button class="tab-btn" role="tab" aria-selected="false" aria-controls="checklist" id="tab-checklist" data-tab="checklist">Checklist</button>
-      <button class="tab-btn" role="tab" aria-selected="false" aria-controls="notes" id="tab-notes" data-tab="notes">Notes</button>
     </div>
   </nav>
 
   <main class="app">
     <section class="tab-panel active" id="overview" role="tabpanel" aria-labelledby="tab-overview">
-      <div class="section-head"><div><span class="eyebrow">Overview</span><h2>目前狀態總覽</h2></div><p>以新版行程資料為唯一真實來源：Rottnest 已刪除，Caversham Wildlife Park 是 Perth 無尾熊主方案，7/14–7/15 改為西澳南部住一晚。</p></div>
+      <div class="section-head"><div><span class="eyebrow">Overview</span><h2>Trip board</h2></div></div>
       <div class="grid three">
-        <article class="card"><div class="badge-row"><span class="badge confirmed">Confirmed / 已確定</span></div><h3>航班</h3><p class="muted">國際與澳洲境內航班皆已確定，共 6 段。</p><div id="flightSummary"></div></article>
-        <article class="card"><div class="badge-row"><span class="badge confirmed">Confirmed / 已確定</span><span class="badge pending">Pending / 待確認</span></div><h3>住宿</h3><p class="muted">塔斯 7/1–7/6 已確定；Launceston、Perth、西澳南部與 7/15 晚仍待訂。</p></article>
-        <article class="card"><div class="badge-row"><span class="badge pending">Pending / 待確認</span></div><h3>Relocation</h3><p class="muted">路線已規劃，採 7/12 晚上前抵達 Perth 版；車輛申請、取還車、保險與每晚住宿待確認。</p></article>
-      </div>
-      <div class="grid two" style="margin-top:13px">
-        <article class="card"><h3>目前重要取捨</h3><ul class="list"><li>Melbourne → Perth relocation 採 7/12 晚上前抵達 Perth 版。</li><li>不採用之前的 5 天趕路版。</li><li>Rottnest Island 先刪除，不列入目前主線。</li><li>Fremantle 可作為 7/12 抵達早時的彈性選項，不列為必去。</li><li>Caversham Wildlife Park 是 Perth 無尾熊主方案。</li><li>Busselton Jetty Train 建議訂 7/14 11:00；若無票則 12:00。</li></ul></article>
-        <article class="card"><h3>最快待辦</h3><ul class="list"><li>7/6–7/7 Launceston 住宿。</li><li>Transfercar relocation 是否成功被接受與取還車細節。</li><li>7/7–7/16 各晚住宿。</li><li>Caversham、Busselton Jetty Train、洞穴與酒莊 / 巧克力實際選點。</li></ul></article>
+        <article class="card"><div class="badge-row"><span class="badge confirmed">Confirmed / 已確定</span></div><h3>已確定</h3><ul class="list"><li>6 段航班</li><li>塔斯 7/1–7/6 住宿</li><li>Bicheno Penguin Tours</li></ul></article>
+        <article class="card"><div class="badge-row"><span class="badge pending">Pending / 待確認</span></div><h3>待確認</h3><ul class="list"><li>Launceston 住宿</li><li>Transfercar relocation</li><li>Perth / 南部住宿</li><li>活動預約</li></ul></article>
+        <article class="card"><div class="badge-row"><span class="badge info">Route</span></div><h3>目前主線</h3><div class="route"><span class="chip">Tasmania</span><span class="chip">Relocation</span><span class="chip">Perth / WA</span></div></article>
       </div>
     </section>
 
@@ -90,10 +78,9 @@
     </section>
 
     <section class="tab-panel" id="drive" role="tabpanel" aria-labelledby="tab-drive">
-      <div class="section-head"><div><span class="eyebrow">Drive / Relocation</span><h2>Melbourne → Perth relocation</h2></div><p>Daily 已逐日列出 relocation 每天目的；此處聚焦主版 / 備案比較、車輛條件與風險待確認。</p></div>
-      <div class="grid two">
+      <div class="section-head"><div><span class="eyebrow">Drive</span><h2>Melbourne → Perth relocation</h2></div></div>
+      <div class="grid">
         <article class="card"><div class="badge-row"><span class="badge confirmed">主方案</span><span class="badge info">7/12 晚上前抵達 Perth</span></div><h3>6 天推進版</h3><div class="plan" id="mainDrivePlan"></div></article>
-        <article class="card"><div class="badge-row"><span class="badge backup">Backup / 備案</span></div><h3>5 天趕路版</h3><p class="muted">新版資料明確指出不採用之前的 5 天趕路版；僅保留為歷史備案說明，不作目前主線。</p><div class="plan" id="backupDrivePlan"></div></article>
       </div>
       <div class="grid two" style="margin-top:13px">
         <article class="card"><h3>車輛資訊</h3><ul class="list"><li>路線：Melbourne / Tullamarine → Perth Airport。</li><li>平台：Transfercar relocation。</li><li>車型：Hatchback 5 seats，Hyundai i20 or similar。</li><li>12 free days；10 optional days at AU$50/day。</li><li>里程 5000 km；Fuel / Ferry / Expenses included：No。</li></ul></article>
@@ -111,28 +98,12 @@
       <div class="grid two" id="checkGroups"></div>
     </section>
 
-    <section class="tab-panel" id="notes" role="tabpanel" aria-labelledby="tab-notes">
-      <div class="section-head"><div><span class="eyebrow">Notes</span><h2>Notes / V2</h2></div><p>任何資料缺漏只列在 V2，不自行補內容。</p></div>
-      <div class="grid two">
-        <article class="card"><h3>頁面原則</h3><ul class="list"><li>單一 `index.html`。</li><li>純 HTML + CSS + vanilla JavaScript。</li><li>所有 CSS / JS 內嵌，離線可用。</li><li>不使用外部 CDN、框架或套件。</li><li>以新版行程資料作為唯一真實來源。</li></ul></article>
-        <article class="card"><h3>V2 待補</h3><ul class="list"><li>Launceston、Perth、南部、機場附近住宿實際預訂資訊。</li><li>Transfercar 申請結果、取還車與保險條款。</li><li>Caversham Wildlife Park 最新營業時間、票價、互動時段與預約規則。</li><li>Busselton Jetty Train 7/14 11:00 或 12:00 班次訂票結果。</li><li>Lake Cave 或 Mammoth Cave 二選一。</li><li>7/14 酒莊與巧克力工廠實際選點。</li><li>7/12 是否有時間安排 Fremantle Markets。</li></ul></article>
-      </div>
-    </section>
   </main>
 
   <button class="back-top" type="button" aria-label="回到頂部">↑</button>
   <footer><div class="app">Australia 2026 · Offline tab dashboard</div></footer>
 
   <script>
-    const flights = [
-      ['2026/6/30','TPE → SIN','Scoot TR867','16:20–20:45','Confirmed / 已確定'],
-      ['2026/7/1','SIN → MEL','Scoot TR58','02:30–11:45','Confirmed / 已確定'],
-      ['2026/7/1','MEL → HBA','Jetstar JQ709','16:10–17:30','Confirmed / 已確定'],
-      ['2026/7/7','LST → MEL','Qantas QF2098','06:30–07:45','Confirmed / 已確定'],
-      ['2026/7/16','PER → SIN','Scoot TR29','05:35–10:55','Confirmed / 已確定'],
-      ['2026/7/16','SIN → TPE','Scoot TR872','12:25–17:10','Confirmed / 已確定']
-    ];
-
     const days = [
       {d:'6/30',no:'Day 1',area:'台北 → 新加坡',focus:'從台北出發，抵達新加坡轉機',flight:'TPE → SIN，Scoot TR867，16:20–20:45',stay:'機場轉機 / 無正式住宿',drive:'無',pending:'無；航班已確定',status:'confirmed'},
       {d:'7/1',no:'Day 2',area:'新加坡 → 墨爾本 → 荷巴特',focus:'抵達 Hobart Airport、領取租車、開車前往 Foreshore Hotel、晚餐休息',flight:'SIN → MEL，Scoot TR58，02:30–11:45；MEL → HBA，Jetstar JQ709，16:10–17:30',stay:'Foreshore Hotel',drive:'Hobart Airport → Foreshore Hotel：約 20–30 分鐘',pending:'無；航班與住宿已確定',status:'confirmed'},
@@ -173,7 +144,6 @@
       ['7/11','Kalgoorlie → Merredin / Northam','Merredin 或 Northam','約 4–6 小時'],
       ['7/12','Merredin / Northam → Perth','Perth','約 1.5–3 小時']
     ];
-    const backupDrive = [['歷史備案','之前的 5 天趕路版','新版資料：不採用','僅保留為備案標示']];
     const driveRisks = ['Transfercar 是否接受申請','取車時間與取車地點','還車時間與還車地點','是否可營業時間外取還車','bond / excess','晚還車費','超里程費','unsealed roads 規定','夜間駕駛限制','roadside assistance','是否需要特別保險'];
 
     const spots = [
@@ -212,7 +182,6 @@
 
     function renderDrive(){
       document.querySelector('#mainDrivePlan').innerHTML = mainDrive.map(row=>`<div class="plan-row"><strong>${row[0]} · ${row[1]}</strong><span><b>建議住宿</b><br>${row[2]}</span><span><b>開車</b><br>${row[3]}</span></div>`).join('');
-      document.querySelector('#backupDrivePlan').innerHTML = backupDrive.map(row=>`<div class="plan-row"><strong>${row[0]} · ${row[1]}</strong><span>${row[2]}</span><span>${row[3]}</span></div>`).join('');
       document.querySelector('#driveRisks').innerHTML = driveRisks.map(item=>`<div class="mini-card">${esc(item)}</div>`).join('');
     }
 
@@ -242,7 +211,6 @@
       window.addEventListener('scroll',toggle,{passive:true}); toggle();
     }
 
-    document.querySelector('#flightSummary').innerHTML = flights.map(f=>`<div class="mini-card" style="margin-top:8px"><strong>${f[0]} · ${f[2]}</strong><br><span class="muted">${f[1]} · ${f[3]}</span></div>`).join('');
     renderTable('#confirmedStay',['日期','晚數','城市 / 區域','住宿名稱','備註','狀態'],confirmedStays);
     renderTable('#pendingStay',['日期','晚數','建議城市','原因 / 備註','狀態'],pendingStays);
     renderDays(); renderDrive(); renderSpots(); renderChecks(); setupTabs(); setupBackTop();
